@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue的模板语法</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h1>插值语法</h1>
+      <hr />
+      <span>我笑了，{{message}}</span>
+      <h1>指令语法</h1>
+      <span :id = "test">我笑了，{{message}}</span>
+
+    </div>
+    <script type="text/javascript">
+      //生产系统的提示
+      Vue.config.productionTip = false;
+
+      var vm = new Vue({
+        el: "#root",
+        data() {
+          return {
+            message: "你好 这个世界",
+            test:"1234aaa"
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
