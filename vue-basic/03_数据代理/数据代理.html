@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      let user = {
+        name: "妙公子",
+      };
+      let proxyUser={
+
+      }
+      //通过一个对象访问另外一个对象
+      //有点类似于装饰者模式
+      Object.defineProperty(proxyUser,'name',{
+				get(){
+					return user.name
+				},
+				set(value){
+					user.x = value
+				}
+			})
+      console.log(proxyUser.name);
+    </script>
+  </body>
+</html>

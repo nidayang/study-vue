@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+        单向数据绑定：<input type="text" v-bind:value="name"><br/>
+        单向数据绑定：<input type="text" :value="name"><br/>
+        双向数据绑定：<input type="text" v-model:value="name"><br/>
+        双向数据绑定：<input type="text" v-model="name"><br/>
+    </div>
+    <script type="text/javascript">
+      //生产系统的提示
+      Vue.config.productionTip = false;
+
+      var vm = new Vue({
+        el: "#root",
+        data() {
+          return {
+            name:'你好 这个世界'
+          };
+        },
+      });
+    </script>
+  </body>
+</html>
