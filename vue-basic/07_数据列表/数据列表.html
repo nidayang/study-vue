@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>基本列表</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+    <!-- 这边的key还是比较重要的 涉及到虚拟的dom和真实的dom,涉及增删改查的时候 如果没有选择真实的key 会导致页面的效果出现问题-->
+        <div id="root">
+            <input type="text" placeholder="请输入姓名"
+            v-model:value= "keyWord">
+            <h2>人员列表（遍历数组）</h2>
+            <ul>
+                <li v-for="(p, index) in persons" :key="index">
+                    {{index}}-{{p.name}}-{{p.age}}
+                </li>
+            </ul>
+            <h2>遍历对象</h2>
+            <ul>
+                <li v-for="(my, index) in myObject" :key="index">
+                    {{index}}-{{my}}
+                </li>
+            </ul>
+            <h2>列表过滤</h2>
+            <ul>
+                <li v-for="(p, index) in filterPersons" :key="p.id">
+                    {{index}}-{{p.name}}
+                </li>
+            </ul>
+            <h2>列表根据姓名排序</h2>
+            <ul>
+                <li v-for="(p, index) in sortPersons" :key="p.id">
+                    {{index}}-{{p.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+	<script type="text/javascript">
+        Vue.config.productionTip = false
+
+        new Vue({
+            el:'#root',
+            data:{
+                keyWord:'',
+                persons:[
+						{id:'001',name:'张三',age:18},
+						{id:'002',name:'李四',age:19},
+						{id:'003',name:'王五',age:20}
+					],
+                    myObject: {
+                        title: 'How to do lists in Vue',
+                        author: 'Jane Doe',
+                        publishedAt: '2016-04-10'
+                    }
+            },
+            computed: {
+                filterPersons(){
+                    return this.persons.filter((p)=>
+                    {
+                        console.log(this.keyWord);
+                        return p.name.indexOf(this.keyWord) !== -1
+
+                    })
+                },
+                sortPersons(){
+                    //复制一个新的住宿
+                    const arr= this.persons.map(((x) => x));
+                    return arr.sort((p1,p2)=>{
+                        return p2.age -p1.age
+                        // return p1.age -p2.age
+                    })
+                }
+            },
+
+        });
+    </script>
+</html>
