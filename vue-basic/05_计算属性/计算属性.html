@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>姓名案例_插值语法实现</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+  </head>
+  <body>
+    <!-- 准备好一个容器-->
+    <div id="root">
+      姓：<input type="text" v-model="firstName" /> <br /><br />
+      名：<input type="text" v-model="lastName" /> <br /><br />
+      出生年月：<input type="text" v-model="brithyear" /> <br /><br />
+      全名：<span>{{firstName}}-{{lastName}}</span><br /><br />
+      年龄：<span>{{2022-brithyear}}</span><br /><br />
+      年龄：<span>{{calculate()}}</span><br /><br />
+      是否是一个男人：<span>{{isAMan}}</span><br /><br />
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+
+    new Vue({
+      el: "#root",
+      data: {
+        firstName: "张",
+        lastName: "三",
+        brithyear: 2020,
+      },
+      methods: {
+        calculate() {
+          return 2022 - this.brithyear;
+        },
+      },
+      //其实就是计算出的一个属性，需要一定的逻辑操作
+      //这个计算出来的属性也是响应式的，相当于data里面的属性，也是做了代理的
+      computed: {
+        // isAMan() {
+        //   return 2022 - this.brithyear > 20 ? "yes" : "no";
+        // },
+        isAMan: {
+          get() {
+            console.log(2);
+            return 2022 - this.brithyear > 20 ? "yes" : "no";
+          },
+          set(val) {
+           this.brithyear = val;
+          },
+        },
+      },
+    });
+  </script>
+</html>
