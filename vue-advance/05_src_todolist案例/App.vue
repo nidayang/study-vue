@@ -8,11 +8,9 @@
           :changeTodoStatus="changeTodoStatus"
           :delTodo="delTodo"
         ></MyList>
-        <MyFooter
-          :todos="todos"
-          :checkAllTodo="checkAllTodo"
-          :clearAllTodo="clearAllTodo"
-        ></MyFooter>
+        <MyFooter :todos="todos"
+        :checkAllTodo="checkAllTodo" 
+        :clearAllTodo="clearAllTodo"></MyFooter>
       </div>
     </div>
   </div>
@@ -28,12 +26,17 @@ export default {
   components: { MyHeader, MyList, MyFooter },
   data() {
     return {
-      todos: JSON.parse(localStorage.getItem("todos")) || [],
+      todos: [
+        { id: "001", title: "吃饭", isDone: true },
+        { id: "002", title: "吃饭", isDone: false },
+        { id: "003", title: "吃饭", isDone: false },
+        { id: "004", title: "吃饭", isDone: false },
+      ],
     };
   },
   methods: {
     addtodo(todoObject) {
-      this.todos.unshift(todoObject);
+      this.todos.push(todoObject);
     },
 
     changeTodoStatus(id) {
@@ -57,14 +60,6 @@ export default {
       this.todos = this.todos.filter((todo) => {
         return !todo.isDone;
       });
-    },
-  },
-  watch: {
-    todos: {
-      deep: true,
-      handler(value) {
-        localStorage.setItem("todos", JSON.stringify(value));
-      },
     },
   },
 };
